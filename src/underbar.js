@@ -97,6 +97,32 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    // Method #3, cleaner filter
+    var seen = {};
+    return _.filter(array, function(element) {
+      seen[element] = (seen[element]||0)+1;
+      return seen[element] === 1;
+    });
+    // Method #2, with filter:
+    /*var seen = {};
+    return _.filter(array, function(element) {
+      if (seen[element] === undefined) {
+        seen[element] = true;
+        return true;
+      }
+      return false;
+    });*/
+    // Method #1:
+    /*var seen = {};
+    _.each(array, function(element) {
+      seen[element] = true;
+    });
+    var uniq = [];
+    for (var property in seen) {
+      uniq.push(Number(property) || property);
+    }
+    console.log(uniq);
+    return uniq;*/
   };
 
 
