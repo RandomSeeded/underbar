@@ -91,6 +91,8 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    // The idea is we want to give filter the function which is the opposite / inverse of test
+    return _.filter(collection, function(element) { return !test(element); });
   };
 
   // Produce a duplicate-free version of the array.
