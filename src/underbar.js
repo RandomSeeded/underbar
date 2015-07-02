@@ -253,7 +253,7 @@
     for (var i = 1; i < arguments.length; i++) {
       var from = arguments[i];
       for (var property in from) {
-        obj[property] = (obj[property] === undefined) ? from[property] : obj[property];
+        if (obj[property] === undefined) { obj[property] = from[property]; }
       }
     }
     return obj;
