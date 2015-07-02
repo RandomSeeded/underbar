@@ -300,6 +300,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var results = {};
+    // NOTE: the following will yield incorrect results if we did, say:
+    // var memoAdd = _.memoize(function(a,b) { return a + b });
+    // var result1 = memoAdd(1, 2);
+    // var result2 = memoAdd(1, 3); -> [this would incorrectly yield 3]
+    return function(key) {
+      if (results[key] === undefined) {
+        results[key] = func.apply(this, arguments);
+      }
+      return results[key];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
