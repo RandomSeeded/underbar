@@ -340,6 +340,15 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    var results = [];
+    _.each(collection, function(element) {
+      /*if (typeof functionOrKey === string) {
+        //results.push(element[functionOrKey](arguments));
+      }*/
+      if (typeof functionOrKey === "string") { results.push(element[functionOrKey](arguments)); }
+      else { results.push(functionOrKey.apply(element, arguments)); }
+    });
+    return results;
   };
 
   // Sort the object's values by a criterion produced by an iterator.
